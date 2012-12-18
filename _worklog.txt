@@ -1,4 +1,15 @@
 SDScaffoldKit
 
 Scaffolding for your CoreData Models
+Added IndexViewController
+Added InitWithout Style
+Added ShowViewController
 
+-AddViewController
+-View/Edit/Delete ViewController
+-SSPullToRefresh?
+-properties to set edit/delete/add
+-Validations and Warnings on Add
+-Only show save when required fields are compelted
+-UiTableViewCell with Textfield
+-Auto Select Keyboard based on type

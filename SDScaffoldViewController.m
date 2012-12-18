@@ -5,13 +5,12 @@
 //  Created by Steve Derico on 12/18/12.
 //  Copyright (c) 2012 Bixby Apps. All rights reserved.
 //
-
+#import "SDScaffoldShowViewController.h"
+#import "SDScaffoldAddViewController.h"
 #import "SDScaffoldViewController.h"
 
 @interface SDScaffoldViewController () <NSFetchedResultsControllerDelegate>{
-    
-
-
+    NSString *_sortPropertyName;
 }
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 - (void)showAddViewController;
@@ -22,16 +21,21 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
 
-- (id)initWithEntityName:(NSString*)entityName context:(NSManagedObjectContext*)moc andStyle:(UITableViewStyle)style{
+- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)propertyName context:(NSManagedObjectContext*)moc andStyle:(UITableViewStyle)style{
     self = [super initWithStyle:style];
     if (self) {
             // Custom initialization
         self.entityName = entityName;
         self.managedObjectContext = moc;
-       
+        _sortPropertyName = propertyName;
         //Fetch Items
        [self refreshData];
     }
+    return self;
+}
+
+- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)propertyName context:(NSManagedObjectContext*)moc{
+    self = [self initWithEntityName:entityName sortBy:propertyName context:moc andStyle:UITableViewStyleGrouped];
     return self;
 }
 
@@ -56,7 +60,7 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Spot"];
     
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"price" ascending:YES]];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:_sortPropertyName ascending:YES]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
@@ -149,13 +153,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
+    SDScaffoldShowViewController *showVC = [[SDScaffoldShowViewController alloc] initWithEntity:[_fetchedResultsController objectAtIndexPath:indexPath] context:self.managedObjectContext];
+    [self.navigationController pushViewController:showVC animated:YES];
+
 }
 
 
@@ -164,7 +165,9 @@
 - (void)showAddViewController{
 
 
+    SDScaffoldAddViewController *addVC = [[SDScaffoldAddViewController alloc]initWithEntityName:self.entityName context:self.managedObjectContext];
 
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 @end
