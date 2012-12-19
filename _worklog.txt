@@ -11,15 +11,15 @@ Improved Add Form
 Save Function
 Auto Select Keyboard based on type
 UiTableViewCell with Textfield
--Edit Function
+Added Edit Function
 -Delete Function
 
 
 
 
-
+-Fix DatePicker
 -properties to set edit/delete/add
--Validations and Warnings on Add
+-Validations and Warnings on Add/Edit
 -Update SDTextFieldCell
 -Only show save when required fields are compelted?
 -SSPullToRefresh?
