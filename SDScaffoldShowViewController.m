@@ -72,9 +72,9 @@
 {
     if (self.tableView.editing == YES) {
         static NSString *textFieldID = @"CellText";
-        ELCTextFieldCell *cell = (ELCTextFieldCell*)[tableView dequeueReusableCellWithIdentifier:textFieldID];
+        ELCRightTextFieldCell *cell = (ELCRightTextFieldCell*)[tableView dequeueReusableCellWithIdentifier:textFieldID];
         if (cell == nil) {
-            cell = [[ELCTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:textFieldID];
+            cell = [[ELCRightTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:textFieldID];
         }
         cell.indexPath = indexPath;
         cell.delegate = self;
@@ -192,5 +192,38 @@
 
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+
+    if (self.tableView.editing == NO) {
+        return nil;
+    }
+    
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 175)];
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(10, 10, footer.bounds.size.width - 10 - 10, 45);
+    [button setTitle:@"Delete" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(deleteTapped) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview: button];
+    
+    return footer;
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+    return 75.0;
+
+}
+
+
+- (void)deleteTapped{
+
+    [self.managedObjectContext deleteObject:entity];
+    [self.managedObjectContext save:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 
 @end

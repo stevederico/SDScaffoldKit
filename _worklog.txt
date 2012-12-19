@@ -1,5 +1,5 @@
 SDScaffoldKit
-
+12/18/12
 Scaffolding for your CoreData Models
 Added IndexViewController
 Added InitWithout Style
@@ -12,14 +12,19 @@ Save Function
 Auto Select Keyboard based on type
 UiTableViewCell with Textfield
 Added Edit Function
--Delete Function
-
-
-
+Improved Save Format on Edit
+Fixed ELCCells for Edit
+Added Delete Function
+Added Index Refresh on ViewDidAppear
 
 -Fix DatePicker
 -properties to set edit/delete/add
--Validations and Warnings on Add/Edit
 -Update SDTextFieldCell
--Only show save when required fields are compelted?
--SSPullToRefresh?
+-Code Cleanup and Comment
+
+???
+-Only show save when required fields are compelted
+-Validation Error Alerts on Add/Edit
+-SSPullToRefresh
+-Cancel Edit Mode
+-Better Plurals

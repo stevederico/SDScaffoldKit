@@ -39,8 +39,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     self.title = [NSString stringWithFormat:@"%@s",self.entityName];
@@ -48,14 +47,22 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddViewController)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-  
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+
+    [super viewDidAppear:animated];
     
+    [self refreshData];
+    
+    [self.tableView reloadData];
+
 }
 
 - (void)refreshData{
     
 //    [self.pullToRefreshView startLoading];
-    NSString *entityName = [NSString stringWithFormat:@"%@",self.class];
+    NSString *entityName = [NSString stringWithFormat:@"%@",self.entityName];
      NSLog(@"EntityName %@", entityName);
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Spot"];
