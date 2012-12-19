@@ -10,47 +10,48 @@
 
 @interface SDScaffoldShowViewController (){
     
-    NSArray *attributes;
-    NSMutableArray *attributeTypes;
-    NSMutableArray *values;
+    NSArray *_attributes;
+    NSMutableArray *_attributeTypes;
+    NSMutableArray *_values;
+    NSEntityDescription *_entityDescription;
 
 }
 
 @end
 
 @implementation SDScaffoldShowViewController
-@synthesize entity;
+@synthesize entity = _entity;
 @synthesize entityName = _entityName;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize isEditable = _isEditable;
 @synthesize isDeletable = _isDeletable;
-- (id)initWithEntity:(id)e context:(NSManagedObjectContext*)moc{
+
+- (id)initWithEntity:(id)entity context:(NSManagedObjectContext*)moc{
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
+        
+        //Setup Properties
         self.isDeletable = YES;
         self.isEditable = YES;
-        self.entity = e;
+        self.entity = entity;
         self.managedObjectContext = moc;
-        attributeTypes = [[NSMutableArray alloc] init];
-
-      
-        NSEntityDescription *entityDescription = [e entity];
+        self.title = self.entityName;
         
-        for (NSPropertyDescription *property in entityDescription) {
-            NSLog(@"Property %@",[[[property valueForKey:@"attributeType"] class] description]);
-            [attributeTypes addObject:[property valueForKey:@"attributeType"]];
+        //Setup Insance Variables
+        _attributeTypes = [[NSMutableArray alloc] init];
+        _entityDescription = [entity entity];
+        _attributes = [[_entityDescription attributesByName] allKeys];
+        _values = [[NSMutableArray alloc] init];
+        
+        //Populate AttributeTypes Array
+        for (NSPropertyDescription *property in _entityDescription) {
+            [_attributeTypes addObject:[property valueForKey:@"attributeType"]];
         }
         
-        attributes = [[entityDescription attributesByName] allKeys];
-        NSLog(@"Array %@",attributes);
-        values = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i<attributes.count; i++) {
-            [values insertObject:@"" atIndex:0];
+        //Fill Values Array with Dummy Data
+        for (int i = 0; i< _attributes.count; i++) {
+            [_values insertObject:@"" atIndex:0];
         }
-        
-        NSLog(@"Init editable %d",self.isEditable);
-
     }
     
     return self;
@@ -58,217 +59,143 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-      self.title = self.entityName;
-        //Add Edit Button Here
-    NSLog(@"Init editable %d",self.isEditable);
-    self.tableView.allowsSelection = NO;
+    
+    //Check if isEditable Property is Set
     if (self.isEditable == YES) {
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(editTapped)];
         self.navigationItem.rightBarButtonItem = editButton;
-       
-    }else{
+    } else {
         self.navigationItem.rightBarButtonItem = nil;
-    
     }
-
+    
+    //Disable TableView Selection
+    self.tableView.allowsSelection = NO;
 }
 
 
-
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [attributes count];
+    return [_attributes count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (self.tableView.editing == YES) {
+        
+        //Setup Cell Identifer
         static NSString *textFieldID = @"CellText";
+        
+        //Try to Dequeue Cell if possible
         ELCRightTextFieldCell *cell = (ELCRightTextFieldCell*)[tableView dequeueReusableCellWithIdentifier:textFieldID];
+        
+        //If no dequeued cell then create new with indentifer
         if (cell == nil) {
             cell = [[ELCRightTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:textFieldID];
         }
         
+        //Configure Edit Cell
         [self configureEditCell:cell forRowAtIndexPath:indexPath];
         
         return cell;
         
     }else{
-    
+        
+        //Create Cell Identifier
         static NSString *CellIdentifier = @"Cell";
+        
+        //Try to Dequeue Cell if possible
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        //If no dequeued cell then create new with indentifer
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
-        cell.textLabel.text = [[attributes objectAtIndex:indexPath.row] capitalizedString];
-        cell.detailTextLabel.text = [[entity valueForKey:[attributes objectAtIndex:indexPath.row]] description];
+        //Configure Cell
+        cell.textLabel.text = [[_attributes objectAtIndex:indexPath.row] capitalizedString];
+        cell.detailTextLabel.text = [[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description];
+       
         return cell;
     }
-
-    return nil;
 }
 
 
- // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    
- return NO;
+    //Disabled Red Sidebar Icons in Edit Mode
+    return NO;
 }
 
-- (void)configureEditCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+- (void)configureEditCell:(ELCTextFieldCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+        
+    cell.indexPath = indexPath;
+    cell.delegate = self;
     
-     ELCTextFieldCell *c = (ELCTextFieldCell*)cell;
-    
-    c.indexPath = indexPath;
-    c.delegate = self;
-    c.textLabel.text = [[attributes objectAtIndex:indexPath.row] capitalizedString];
-    c.rightTextField.placeholder = [[entity valueForKey:[attributes objectAtIndex:indexPath.row]] description];
-    c.rightTextField.text = @"";
-    if ([[values objectAtIndex:indexPath.row] isEqualToString:@"!"]) {
-        c.rightTextField.placeholder = [[attributes objectAtIndex:indexPath.row] description];
-    }else{
-        c.rightTextField.text = [[values objectAtIndex:indexPath.row] description];
+    //Set Text Labels
+    cell.rightTextField.text = @"";
+    cell.textLabel.text = [[_attributes objectAtIndex:indexPath.row] capitalizedString];
+    cell.rightTextField.placeholder = [[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description];
+
+    //If there is no value for attribute then put attribute name in placeholder
+    if ([[_values objectAtIndex:indexPath.row] isEqualToString:@""]) {
+        cell.rightTextField.placeholder = [[_attributes objectAtIndex:indexPath.row] description];
+    } else {
+        cell.rightTextField.text = [[_values objectAtIndex:indexPath.row] description];
     }
     
-//    static UIDatePicker *datePicker;
-//    datePicker =  [[UIDatePicker alloc] init];
-//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-//    [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    //Create UIDatePicker first time and then reference it afterwards
+    static UIDatePicker *datePicker;
+    if (datePicker == nil) {
+        datePicker =  [[UIDatePicker alloc] init];
+        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    }
     
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:self.entityName inManagedObjectContext:self.managedObjectContext];
     
-    switch ([[[entityDescription attributesByName] valueForKey:[attributes objectAtIndex:indexPath.row]] attributeType]) {
+    switch ([[[_entityDescription attributesByName] valueForKey:[_attributes objectAtIndex:indexPath.row]] attributeType]) {
         case 0:
-            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 100:
-            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 200:
-            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 300:
-            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 400:
-            c.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 500:
-            c.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 600:
-            c.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 700:
-            c.rightTextField.keyboardType = UIKeyboardTypeDefault;
+            cell.rightTextField.keyboardType = UIKeyboardTypeDefault;
             break;
         case 800:
-            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 900:
-                //Add Date Picker
-//            datePicker.tag = indexPath.row;
-//            c.rightTextField.inputView = datePicker;
-            
+            datePicker.tag = indexPath.row;
+            cell.rightTextField.inputView = datePicker;
             break;
-            
         default:
-            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
             break;
     } 
 }
 
 
-
-
-- (void)editTapped{
-    
-    if (self.tableView.editing == NO) {
-        [self.tableView setEditing:YES animated:YES];
-        [self.navigationItem.rightBarButtonItem setTitle:@"Save"];
-        [self.navigationItem.rightBarButtonItem setTarget:self];
-        [self.navigationItem.rightBarButtonItem setAction:@selector(saveObject)];
-    }
-    
-    [self.tableView reloadData];
-
-}
-
-
-#pragma mark - Save Core Data
-
--(void)saveObject{
-    
-    [self.managedObjectContext save:nil];
-    
-    [self.tableView setEditing:NO animated:YES];
-    [self.navigationItem.rightBarButtonItem setTitle:@"Edit"];
-    [self.navigationItem.rightBarButtonItem setTarget:self];
-    [self.navigationItem.rightBarButtonItem setAction:@selector(editTapped)];
-    [self.tableView reloadData];
-    
-}
-
-#pragma mark - ELCTextField Delegate
-
-- (void)textFieldCell:(ELCTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
-
-    NSString *stringValue = [inValue description];
-    NSNumber *intValue = [NSNumber numberWithInt:[inValue integerValue]];
-    NSNumber *floatValue = [NSNumber numberWithFloat:[inValue floatValue]];
-
-    if (![stringValue length] == 0){
-
-        switch ([[attributeTypes objectAtIndex:inIndexPath.row] integerValue]) {
-            case 0:
-                [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 100:
-                [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 200:
-                [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 300:
-                [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 400:
-                [entity setValue:floatValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 500:
-                [entity setValue:floatValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 600:
-                [entity setValue:floatValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 700:
-
-                [entity setValue:stringValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 800:
-                [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-            case 900:
-                    //Add Date Picker Support
-                break;
-                
-            default:
-                [entity setValue:stringValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
-                break;
-        }
-        
-
-    }
-
-}
-
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-
+    
     if (self.isDeletable == NO) {
         return nil;
     }
@@ -287,22 +214,102 @@
     [footer addSubview: button];
     
     return footer;
-
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-
+    
     return 75.0;
-
 }
 
 
-- (void)deleteTapped{
+#pragma mark - ELCTextField Delegate
 
-    [self.managedObjectContext deleteObject:entity];
+- (void)textFieldCell:(ELCTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
+
+    NSString *stringValue = [inValue description];
+    NSNumber *intValue = [NSNumber numberWithInt:[inValue integerValue]];
+    NSNumber *floatValue = [NSNumber numberWithFloat:[inValue floatValue]];
+
+    if (![stringValue length] == 0){
+
+        switch ([[_attributeTypes objectAtIndex:inIndexPath.row] integerValue]) {
+            case 0:
+                [_entity setValue:intValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 100:
+                [_entity setValue:intValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 200:
+                [_entity setValue:intValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 300:
+                [_entity setValue:intValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 400:
+                [_entity setValue:floatValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 500:
+                [_entity setValue:floatValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 600:
+                [_entity setValue:floatValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 700:
+                [_entity setValue:stringValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 800:
+                [_entity setValue:intValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+            case 900:
+                    //Add Date Picker Support
+                break;
+                
+            default:
+                [_entity setValue:stringValue forKey:[[_attributes objectAtIndex:inIndexPath.row] description]];
+                break;
+        }
+    }
+}
+
+
+#pragma mark - Core Data
+
+-(void)saveObject{
+    
+    //Save Object and Context
     [self.managedObjectContext save:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    //Turn off Edit mode and Reload Table
+    [self.tableView setEditing:NO animated:YES];
+    [self.navigationItem.rightBarButtonItem setTitle:@"Edit"];
+    [self.navigationItem.rightBarButtonItem setTarget:self];
+    [self.navigationItem.rightBarButtonItem setAction:@selector(editTapped)];
+    [self.tableView reloadData];
+    
+}
 
+- (void)deleteTapped{
+    //Delete Object and Save Context
+    [self.managedObjectContext deleteObject:_entity];
+    [self.managedObjectContext save:nil];
+    
+    //Pop Navigation Controller
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)editTapped{
+    // If Editing mode is off then turn it on
+    if (self.tableView.editing == NO) {
+        [self.tableView setEditing:YES animated:YES];
+        [self.navigationItem.rightBarButtonItem setTitle:@"Save"];
+        [self.navigationItem.rightBarButtonItem setTarget:self];
+        [self.navigationItem.rightBarButtonItem setAction:@selector(saveObject)];
+    }
+    
+    [self.tableView reloadData];
+    
 }
 
 @end

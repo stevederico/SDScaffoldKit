@@ -15,6 +15,7 @@
 @property(nonatomic) BOOL isEditable;
 @property(nonatomic) BOOL isViewable;
 @property(nonatomic) BOOL isCreatable;
-- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)propertyName context:(NSManagedObjectContext*)moc;
-- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)propertyName context:(NSManagedObjectContext*)moc andStyle:(UITableViewStyle)style;
+
+- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)sortPropertyName context:(NSManagedObjectContext*)managedObjectContext;
+- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)sortPropertyName context:(NSManagedObjectContext*)managedObjectContext andStyle:(UITableViewStyle)style;
 @end

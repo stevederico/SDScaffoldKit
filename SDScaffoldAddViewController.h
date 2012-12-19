@@ -11,6 +11,7 @@
 @interface SDScaffoldAddViewController : UITableViewController <ELCTextFieldDelegate>
 @property(nonatomic,strong) NSString *entityName;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+
 - (id)initWithEntityName:(NSString*)entityName context:(NSManagedObjectContext*)moc;
 - (void)textFieldCell:(ELCTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue;
 @end

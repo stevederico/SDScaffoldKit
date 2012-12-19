@@ -14,5 +14,6 @@
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property(nonatomic,assign) BOOL isDeletable;
 @property(nonatomic,assign) BOOL isEditable;
-- (id)initWithEntity:(id)e context:(NSManagedObjectContext*)moc;
+
+- (id)initWithEntity:(id)entity context:(NSManagedObjectContext*)moc;
 @end
