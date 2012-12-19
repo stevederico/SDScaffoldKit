@@ -27,6 +27,9 @@ Fixed NSNumber Edit Bug
 Added Keyboard Logic for Editing
 Updated ReadME
 
+12/19
+Cleaned Up Code & Commented AddViewController
+
 -Add Example to Repo
 -Demo Video
 -Fix Doubles Bug
