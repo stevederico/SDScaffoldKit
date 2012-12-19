@@ -126,7 +126,7 @@
         
     NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
     
-    cell.textLabel.text = [managedObject description];
+    cell.textLabel.text = [[managedObject valueForKey:_sortPropertyName] description];
     
     if (self.isViewable == NO) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
