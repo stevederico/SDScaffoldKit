@@ -26,7 +26,8 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
      // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    
-    SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext]];
+    SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] initWithEntityName:@"User" 
+     sortBy:@"lastname" context:[self managedObjectContext]];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scaffoldViewController];
   
