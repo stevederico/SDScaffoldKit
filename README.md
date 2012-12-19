@@ -6,7 +6,9 @@ UIKit can be tedious and repeative to build simple CRUD interfaces. SDScaffoldKi
 
 > SDScaffoldKit is named after Ruby on Rails's [scaffolding](http://guides.rubyonrails.org/getting_started.html#getting-up-and-running-quickly-with-scaffolding).
 
-SDScaffoldingKit is meant to save you time so you can focus on what matters, application logic. The library is still a little green behind the ears and I would love to see any issues or pull request you may have. Overall, this is a great way to get your project up and running then you can go from there.
+SDScaffoldingKit is meant to save you time so you can focus on what matters, application logic. The library is still a little green behind the ears and I would love to see any issues or pull request you may have. There is a sample project if you have any question on how it all works.
+
+Overall, this is a great way to get your project up and running then you can go from there.
 
 > If you enjoy this project, I would encourage you to check out [Mattt Thompson's](http://www.github.com/mattt) series of open source libraries covering the mission-critical aspects of an iOS app's infrastructure. Be sure to check out its sister projects: [GroundControl](https://github.com/mattt/GroundControl), [SkyLab](https://github.com/mattt/SkyLab), [CargoBay](https://github.com/mattt/CargoBay), and [houston](https://github.com/mattt/houston).
 
