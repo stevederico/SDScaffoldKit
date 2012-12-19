@@ -24,12 +24,11 @@ Fixed Editable Issue
 Fixed EntityName Title
 Added sortField as Cell Text
 Fixed NSNumber Edit Bug
+Added Keyboard Logic for Editing
+Updated ReadME
 
-
--Add Keyboard Detection Logic for Edit
 -Add Example to Repo
 -Demo Video
--README File
 -Fix Doubles Bug
 -Demo With Rack Core Data
 -Fix DatePicker
