@@ -5,19 +5,21 @@ Added IndexViewController
 Added InitWithout Style
 Added ShowViewController
 Added AddViewController
+View Function
 Show Function
 Improved Add Form
+Save Function
+Auto Select Keyboard based on type
+UiTableViewCell with Textfield
 -Edit Function
 -Delete Function
 
 
 
--View/Edit/Delete ViewController
--SSPullToRefresh?
+
+
 -properties to set edit/delete/add
 -Validations and Warnings on Add
--Only show save when required fields are compelted
--UiTableViewCell with Textfield
--Save Function
-
--Auto Select Keyboard based on type
+-Update SDTextFieldCell
+-Only show save when required fields are compelted?
+-SSPullToRefresh?
