@@ -25,10 +25,14 @@
     self = [super initWithStyle:style];
     if (self) {
             // Custom initialization
+        self.isDeletable = YES;
+        self.isEditable = YES;
+        self.isViewable = YES;
+        self.isCreatable = YES;
         self.entityName = entityName;
         self.managedObjectContext = moc;
         _sortPropertyName = propertyName;
-        //Fetch Items
+
        [self refreshData];
     }
     return self;
@@ -47,6 +51,10 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddViewController)];
     self.navigationItem.rightBarButtonItem = addButton;
     
+    if (self.isCreatable == NO) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -56,6 +64,9 @@
     [self refreshData];
     
     [self.tableView reloadData];
+    
+  
+    
 
 }
 
@@ -112,19 +123,28 @@
     NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = [managedObject description];
-
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    if (self.isViewable == NO) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
 }
-
 
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.isViewable == NO) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
     
     SDScaffoldShowViewController *showVC = [[SDScaffoldShowViewController alloc] initWithEntity:[_fetchedResultsController objectAtIndexPath:indexPath] context:self.managedObjectContext];
+    showVC.isDeletable = self.isDeletable;
+    showVC.isEditable = self.isEditable;
     [self.navigationController pushViewController:showVC animated:YES];
 
 }

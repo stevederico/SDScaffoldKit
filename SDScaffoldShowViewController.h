@@ -11,5 +11,7 @@
 @interface SDScaffoldShowViewController : UITableViewController <ELCTextFieldDelegate>
 @property(nonatomic,strong) id entity;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@property(nonatomic) BOOL isDeletable;
+@property(nonatomic) BOOL isEditable;
 - (id)initWithEntity:(id)e context:(NSManagedObjectContext*)moc;
 @end

@@ -24,6 +24,8 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.tableView.allowsSelection = NO;
+        self.isDeletable = YES;
+        self.isEditable = YES;
         self.entity = e;
         self.managedObjectContext = moc;
         attributeTypes = [[NSMutableArray alloc] init];
@@ -53,6 +55,10 @@
         //Add Edit Button Here
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(editTapped)];
     self.navigationItem.rightBarButtonItem = editButton;
+    
+    if (self.isEditable == NO) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 
 }
 
@@ -194,6 +200,10 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
 
+    if (self.isDeletable == NO) {
+        return nil;
+    }
+    
     if (self.tableView.editing == NO) {
         return nil;
     }

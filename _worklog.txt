@@ -16,9 +16,14 @@ Improved Save Format on Edit
 Fixed ELCCells for Edit
 Added Delete Function
 Added Index Refresh on ViewDidAppear
+Added Creatable Property
+Added Viewable Property
+Added Deletable Property
+Added Editable Property
+
 
 -Fix DatePicker
--properties to set edit/delete/add
+
 -Update SDTextFieldCell
 -Code Cleanup and Comment
 
