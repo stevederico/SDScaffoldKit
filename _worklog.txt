@@ -25,13 +25,17 @@ Fixed EntityName Title
 Added sortField as Cell Text
 Fixed NSNumber Edit Bug
 
+
+-Add Keyboard Detection Logic for Edit
 -Add Example to Repo
 -Demo Video
 -README File
+-Fix Doubles Bug
 -Demo With Rack Core Data
 -Fix DatePicker
 -Update SDTextFieldCell
 -Code Cleanup and Comment
+-Remove Logs
 
 ???
 -Switches for Booleans

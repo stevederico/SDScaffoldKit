@@ -1,6 +1,6 @@
 //
 //  SDScaffoldShowViewController.m
-//  ParkPro
+//  SDScaffoldKit
 //
 //  Created by Steve Derico on 12/18/12.
 //  Copyright (c) 2012 Bixby Apps. All rights reserved.
@@ -93,10 +93,8 @@
         if (cell == nil) {
             cell = [[ELCRightTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:textFieldID];
         }
-        cell.indexPath = indexPath;
-        cell.delegate = self;
-        cell.textLabel.text = [[attributes objectAtIndex:indexPath.row] capitalizedString];
-        cell.rightTextField.placeholder = [[entity valueForKey:[attributes objectAtIndex:indexPath.row]] description];
+        
+        [self configureEditCell:cell forRowAtIndexPath:indexPath];
         
         return cell;
         
@@ -121,6 +119,71 @@
     
  return NO;
 }
+
+- (void)configureEditCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+    
+     ELCTextFieldCell *c = (ELCTextFieldCell*)cell;
+    
+    c.indexPath = indexPath;
+    c.delegate = self;
+    c.textLabel.text = [[attributes objectAtIndex:indexPath.row] capitalizedString];
+    c.rightTextField.placeholder = [[entity valueForKey:[attributes objectAtIndex:indexPath.row]] description];
+    c.rightTextField.text = @"";
+    if ([[values objectAtIndex:indexPath.row] isEqualToString:@"!"]) {
+        c.rightTextField.placeholder = [[attributes objectAtIndex:indexPath.row] description];
+    }else{
+        c.rightTextField.text = [[values objectAtIndex:indexPath.row] description];
+    }
+    
+//    static UIDatePicker *datePicker;
+//    datePicker =  [[UIDatePicker alloc] init];
+//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+//    [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:self.entityName inManagedObjectContext:self.managedObjectContext];
+    
+    switch ([[[entityDescription attributesByName] valueForKey:[attributes objectAtIndex:indexPath.row]] attributeType]) {
+        case 0:
+            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case 100:
+            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case 200:
+            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case 300:
+            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case 400:
+            c.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            break;
+        case 500:
+            c.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            break;
+        case 600:
+            c.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            break;
+        case 700:
+            c.rightTextField.keyboardType = UIKeyboardTypeDefault;
+            break;
+        case 800:
+            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case 900:
+                //Add Date Picker
+//            datePicker.tag = indexPath.row;
+//            c.rightTextField.inputView = datePicker;
+            
+            break;
+            
+        default:
+            c.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+    } 
+}
+
+
 
 
 - (void)editTapped{
