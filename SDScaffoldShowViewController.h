@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SDScaffoldShowViewController : UITableViewController <ELCTextFieldDelegate>
+@property(nonatomic,strong) NSString *entityName;
 @property(nonatomic,strong) id entity;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
-@property(nonatomic) BOOL isDeletable;
-@property(nonatomic) BOOL isEditable;
+@property(nonatomic,assign) BOOL isDeletable;
+@property(nonatomic,assign) BOOL isEditable;
 - (id)initWithEntity:(id)e context:(NSManagedObjectContext*)moc;
 @end

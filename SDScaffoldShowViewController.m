@@ -19,20 +19,22 @@
 
 @implementation SDScaffoldShowViewController
 @synthesize entity;
+@synthesize entityName = _entityName;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize isEditable = _isEditable;
+@synthesize isDeletable = _isDeletable;
 - (id)initWithEntity:(id)e context:(NSManagedObjectContext*)moc{
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-        self.tableView.allowsSelection = NO;
         self.isDeletable = YES;
         self.isEditable = YES;
         self.entity = e;
         self.managedObjectContext = moc;
         attributeTypes = [[NSMutableArray alloc] init];
         
-        self.title = [NSString stringWithFormat:@"%@",[[self.entity class] description]];
+      
         NSEntityDescription *entityDescription = [e entity];
-  
+        
         for (NSPropertyDescription *property in entityDescription) {
             NSLog(@"Property %@",[[[property valueForKey:@"attributeType"] class] description]);
             [attributeTypes addObject:[property valueForKey:@"attributeType"]];
@@ -45,19 +47,27 @@
         for (int i = 0; i<attributes.count; i++) {
             [values insertObject:@"" atIndex:0];
         }
+        
+        NSLog(@"Init editable %d",self.isEditable);
+
     }
+    
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+      self.title = self.entityName;
         //Add Edit Button Here
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(editTapped)];
-    self.navigationItem.rightBarButtonItem = editButton;
-    
-    if (self.isEditable == NO) {
+    NSLog(@"Init editable %d",self.isEditable);
+    self.tableView.allowsSelection = NO;
+    if (self.isEditable == YES) {
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(editTapped)];
+        self.navigationItem.rightBarButtonItem = editButton;
+       
+    }else{
         self.navigationItem.rightBarButtonItem = nil;
+    
     }
 
 }

@@ -20,14 +20,19 @@ Added Creatable Property
 Added Viewable Property
 Added Deletable Property
 Added Editable Property
+Fixed Editable Issue
+Fixed EntityName Title
+
+
 
 
 -Fix DatePicker
-
 -Update SDTextFieldCell
 -Code Cleanup and Comment
 
 ???
+-Add Swipe to Delete to Index View
+-Wrap in UiNavigationController?
 -Only show save when required fields are compelted
 -Validation Error Alerts on Add/Edit
 -SSPullToRefresh

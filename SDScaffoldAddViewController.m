@@ -249,6 +249,7 @@
     
     [self.managedObjectContext save:nil];
 
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 

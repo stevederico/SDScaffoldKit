@@ -18,6 +18,10 @@
 
 @implementation SDScaffoldViewController
 @synthesize entityName = _entityName;
+@synthesize isEditable = _isEditable;
+@synthesize isDeletable = _isDeletable;
+@synthesize isViewable = _isViewable;
+@synthesize isCreatable = _isCreatable;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
 
@@ -76,7 +80,7 @@
     NSString *entityName = [NSString stringWithFormat:@"%@",self.entityName];
      NSLog(@"EntityName %@", entityName);
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Spot"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:self.entityName];
     
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:_sortPropertyName ascending:YES]];
     
@@ -145,6 +149,7 @@
     SDScaffoldShowViewController *showVC = [[SDScaffoldShowViewController alloc] initWithEntity:[_fetchedResultsController objectAtIndexPath:indexPath] context:self.managedObjectContext];
     showVC.isDeletable = self.isDeletable;
     showVC.isEditable = self.isEditable;
+    showVC.entityName = self.entityName;
     [self.navigationController pushViewController:showVC animated:YES];
 
 }
@@ -153,7 +158,6 @@
 #pragma showAddViewController
 
 - (void)showAddViewController{
-
 
     SDScaffoldAddViewController *addVC = [[SDScaffoldAddViewController alloc]initWithEntityName:self.entityName context:self.managedObjectContext];
 
