@@ -16,8 +16,15 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
 
 1. Add Core Data into your project
 2. Create Core Data Model
-3. Create SDScaffoldViewController instance with desginated initizer initWithEntityName:soryBy:context:andStyle:
-4. Wrap SDScaffoldViewController instance in UINavigationController
+3. Create `SDScaffoldViewController` instance with desginated initializer `initWithEntityName:soryBy:context:andStyle:`
+```objective-c
+    SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] initWithEntityName:@"User" 
+     sortBy:@"lastname" context:[self managedObjectContext]];
+```
+4. Wrap your `SDScaffoldViewController` instance in a `UINavigationController`
+```objective-c 
+ UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scaffoldViewController];
+```
 5. Done!
 
 ```objective-c
