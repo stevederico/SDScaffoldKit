@@ -24,10 +24,12 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
 ```
 
 4. Wrap your `SDScaffoldViewController` instance in a `UINavigationController`
+
 ```objective-c 
  UINavigationController *navController = [[UINavigationController alloc] 
     initWithRootViewController:scaffoldViewController];
 ```
+
 5. Done!
 
 
