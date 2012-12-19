@@ -4,7 +4,7 @@ SDScaffoldKit
 
 UIKit can be tedious and repeative to build simple CRUD interfaces. SDScaffoldKit is a simple library that provides Create, Read, Update, and Delete views/viewcontrollers out-of-the-box. Just create your Core Data model, hand it your Entity's name and a field to sort by and BAM! You are ready to start creating and managing objects.
 
-> SDScaffoldKit is named after Ruby on Rails scaffolding.http://guides.rubyonrails.org/getting_started.html#getting-up-and-running-quickly-with-scaffolding
+> SDScaffoldKit is named after Ruby on Rails's [scaffolding](http://guides.rubyonrails.org/getting_started.html#getting-up-and-running-quickly-with-scaffolding).
 
 SDScaffoldingKit is meant to save you time so you can focus on what matters, application logic. The library is still a little green behind the ears and I would love to see any issues or pull request you may have. Overall, this is a great way to get your project up and running then you can go from there.
 
