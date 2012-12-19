@@ -13,6 +13,7 @@
     NSArray *attributes;
     NSMutableArray *attributeTypes;
     NSMutableArray *values;
+
 }
 
 @end
@@ -31,7 +32,7 @@
         self.entity = e;
         self.managedObjectContext = moc;
         attributeTypes = [[NSMutableArray alloc] init];
-        
+
       
         NSEntityDescription *entityDescription = [e entity];
         
@@ -154,17 +155,13 @@
 
 - (void)textFieldCell:(ELCTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
 
-    int i = 0;
-
     NSString *stringValue = [inValue description];
     NSNumber *intValue = [NSNumber numberWithInt:[inValue integerValue]];
     NSNumber *floatValue = [NSNumber numberWithFloat:[inValue floatValue]];
 
-    if ([stringValue length] == 0) {
-        i++;
-    }else{
+    if (![stringValue length] == 0){
 
-        switch ([[attributeTypes objectAtIndex:i] integerValue]) {
+        switch ([[attributeTypes objectAtIndex:inIndexPath.row] integerValue]) {
             case 0:
                 [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
                 break;
@@ -187,15 +184,14 @@
                 [entity setValue:floatValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
                 break;
             case 700:
+
                 [entity setValue:stringValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
                 break;
             case 800:
                 [entity setValue:intValue forKey:[[attributes objectAtIndex:inIndexPath.row] description]];
                 break;
             case 900:
-                    //Add Date Picker
-                    //                        [managedObject setValue:intValue forKey:attribute];
-                
+                    //Add Date Picker Support
                 break;
                 
             default:
@@ -203,7 +199,7 @@
                 break;
         }
         
-        i++;
+
     }
 
 }

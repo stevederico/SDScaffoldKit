@@ -22,15 +22,20 @@ Added Deletable Property
 Added Editable Property
 Fixed Editable Issue
 Fixed EntityName Title
+Added sortField as Cell Text
+Fixed NSNumber Edit Bug
 
-
-
-
+-Add Example to Repo
+-Demo Video
+-README File
+-Demo With Rack Core Data
 -Fix DatePicker
 -Update SDTextFieldCell
 -Code Cleanup and Comment
 
 ???
+-Switches for Booleans
+-Description for Other Objects
 -Add Swipe to Delete to Index View
 -Wrap in UiNavigationController?
 -Only show save when required fields are compelted
