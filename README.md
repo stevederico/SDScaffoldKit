@@ -1,8 +1,8 @@
 SDScaffoldKit
 =======
-**Scaffolding for CoreData Models**
+**Scaffolding for Core Data Models**
 
-UIKit can be tedious and repeative to build simple CRUD interfaces. SDScaffoldKit is a simple library that provides Create, Read, Update, and Delete views/viewcontrollers out-of-the-box. Just create your CoreData model, hand it your Entity's name and a field to sort by and BAM! You are ready to start creating and managing objects.
+UIKit can be tedious and repeative to build simple CRUD interfaces. SDScaffoldKit is a simple library that provides Create, Read, Update, and Delete views/viewcontrollers out-of-the-box. Just create your Core Data model, hand it your Entity's name and a field to sort by and BAM! You are ready to start creating and managing objects.
 
 > SDScaffoldKit is named after Ruby on Rails scaffolding.http://guides.rubyonrails.org/getting_started.html#getting-up-and-running-quickly-with-scaffolding
 
@@ -15,11 +15,23 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
 ### Create Core Data Models
 
 1. Add Core Data into your project
-2. Create CoreData Model
-3. Create SDScaffoldViewController instance with desginated initizer initWithEntityName:soryBy:context:andStyle:
-4. Wrap SDScaffoldViewController instance in UINavigationController
+2. Create Core Data Model
+3. Create `SDScaffoldViewController` instance with desginated initializer `initWithEntityName:soryBy:context:andStyle:`
+
+```objective-c
+  SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] 
+    initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext] andStyle:UITableViewStyleGrouped];
+```
+4. Wrap your `SDScaffoldViewController` instance in a `UINavigationController`
+
+```objective-c 
+ UINavigationController *navController = [[UINavigationController alloc] 
+    initWithRootViewController:scaffoldViewController];
+```
 5. Done!
 
+
+## Example Usage
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -38,6 +50,9 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
     return YES;
 }
 ```
+## Sample Images
+
+
 ## Contact
 
 Steve Derico
