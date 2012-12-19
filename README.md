@@ -22,13 +22,13 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
   SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] 
     initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext] andStyle:UITableViewStyleGrouped];
 ```
-4.    Wrap your `SDScaffoldViewController` instance in a `UINavigationController`
+Then wrap your `SDScaffoldViewController` instance in a `UINavigationController`
 
 ```objective-c 
  UINavigationController *navController = [[UINavigationController alloc] 
     initWithRootViewController:scaffoldViewController];
 ```
-  5.    Done!
+Done!
 
 
 ## Example Usage
