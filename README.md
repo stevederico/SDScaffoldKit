@@ -51,7 +51,7 @@ SDScaffoldingKit is meant to save you time so you can focus on what matters, app
 }
 ```
 ## Sample Images
-
+![index Image](http://cl.ly/Lh6Q/iOS%20Simulator%20Screen%20shot%20Dec%2018,%202012%209.14.11%20PM.png)
 
 ## Contact
 
