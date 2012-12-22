@@ -18,7 +18,7 @@ Overall, this is a great way to get your project up and running then you can go 
 
 1. Add `CoreData.framework` into your project
 2. Create Core Data Model
-3. `#import "SDScaffoldViewController.h"` and create an instance with desginated initializer `initWithEntityName:soryBy:context:andStyle:`
+3. `#import "SDScaffoldKit.h"` and create an instance with desginated initializer `initWithEntityName:soryBy:context:andStyle:`
 
 ```objective-c
   SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] 
