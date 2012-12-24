@@ -89,7 +89,7 @@
     if (cell == nil) {
         cell = [[SDPlaceholderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.delegate = self;
-//        cell.textField.delegate = self;
+
     }
     
     [self configureCell:cell forRowAtIndexPath:indexPath];
@@ -101,7 +101,6 @@
     //Clear TextField for a clean slate
     cell.textField.text = @"";
     cell.delegate = self;
-//    cell.textField.delegate = self;
     cell.indexPath = indexPath;
     
     //Check if Values are available for given attribute if not, show attribute name in placeholder
@@ -112,12 +111,12 @@
     }
     
     //Create Date Picker for Date AttributeType : This is still a bit buggy :/
-    static UIDatePicker *datePicker;
-    if (datePicker == nil) {
-        datePicker =  [[UIDatePicker alloc] init];
-        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
-    }
+//    static UIDatePicker *datePicker;
+//    if (datePicker == nil) {
+//        datePicker =  [[UIDatePicker alloc] init];
+//        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+//        [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+//    }
    
     //Check AttributeType for given attribute, set keyboard accordingly
     switch ([[[_entityDescription attributesByName] valueForKey:[_attributes objectAtIndex:indexPath.row]] attributeType]) {
@@ -150,8 +149,8 @@
             break;
         case 900:
         //Add Date Picker with tag to refer to in datepicker delegate.
-            datePicker.tag = indexPath.row;
-            cell.textField.inputView = datePicker;
+//            datePicker.tag = indexPath.row;
+//            cell.textField.inputView = datePicker;
             break;
         default:
             cell.textField.keyboardType = UIKeyboardTypeDefault;
@@ -164,8 +163,6 @@
 - (void)textFieldCell:(SDTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
 
     //Add current input to values array, remove old object and insert new until entry is finished.
-    
-    NSLog(@"inValue %@",inValue);
     
     if ([_values count] > 0) {
         [_values removeObjectAtIndex:inIndexPath.row];

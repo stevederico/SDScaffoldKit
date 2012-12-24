@@ -38,16 +38,19 @@ Create SDScaffoldKit folder
 Create SDScaffoldKit.h 
 Updated Project
 
--Update SDTextFieldCell
+12/24
+Updated SDTextFieldCell
+
 -Add Action Sheet to Delete
--Demo Video
+
 -Fix Doubles Bug
 -Demo With Rack Core Data
--Fix DatePicker
+-Add DatePicker Support
 -LoginViewController
 
 
 ???
+-Demo Video
 -Switches for Booleans
 -Description for Other Objects
 -Add Swipe to Delete to Index View

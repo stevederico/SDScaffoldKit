@@ -38,7 +38,6 @@
         self.managedObjectContext = managedObjectContext;
         self.title = [NSString stringWithFormat:@"%@s",self.entityName];
         
-        
         //Setup Instance Variables
         _sortPropertyName = sortPropertyName;
 

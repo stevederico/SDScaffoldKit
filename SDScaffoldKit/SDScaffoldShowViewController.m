@@ -137,23 +137,21 @@
     //Set Text Labels
     cell.textField.text = @"";
     cell.textLabel.text = [[_attributes objectAtIndex:indexPath.row] capitalizedString];
-    cell.textField.placeholder = [[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description];
-
+    
     //If there is no value for attribute then put attribute name in placeholder
-    if ([[_values objectAtIndex:indexPath.row] isEqualToString:@""]) {
+    if ([[[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description] isEqualToString:@""]) {
         cell.textField.placeholder = [[_attributes objectAtIndex:indexPath.row] description];
     } else {
-        cell.textField.text = [[_values objectAtIndex:indexPath.row] description];
+        cell.textField.text = [[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description];
     }
     
     //Create UIDatePicker first time and then reference it afterwards
-    static UIDatePicker *datePicker;
-    if (datePicker == nil) {
-        datePicker =  [[UIDatePicker alloc] init];
-        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
-    }
-    
+//    static UIDatePicker *datePicker;
+//    if (datePicker == nil) {
+//        datePicker =  [[UIDatePicker alloc] init];
+//        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+//        [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+//    }
     
     switch ([[[_entityDescription attributesByName] valueForKey:[_attributes objectAtIndex:indexPath.row]] attributeType]) {
         case 0:
@@ -184,8 +182,8 @@
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 900:
-            datePicker.tag = indexPath.row;
-            cell.textField.inputView = datePicker;
+//            datePicker.tag = indexPath.row;
+//            cell.textField.inputView = datePicker;
             break;
         default:
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
