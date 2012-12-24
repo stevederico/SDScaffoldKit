@@ -21,10 +21,10 @@ Overall, this is a great way to get your project up and running then you can go 
 3. `#import "SDScaffoldKit.h"` and create an instance with desginated initializer `initWithEntityName:soryBy:context:andStyle:`
 
 ```objective-c
-  SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] 
+  SDScaffoldIndexViewController *scaffoldViewController = [[SDScaffoldIndexViewController alloc] 
     initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext] andStyle:UITableViewStyleGrouped];
 ```
-Then wrap your `SDScaffoldViewController` instance in a `UINavigationController`
+Then wrap your `SDScaffoldIndexViewController` instance in a `UINavigationController`
 
 ```objective-c 
  UINavigationController *navController = [[UINavigationController alloc] 
