@@ -20,7 +20,7 @@
 		55C0F6C816822B5A0072FAB0 /* SDScaffoldExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F6C616822B5A0072FAB0 /* SDScaffoldExample.xcdatamodeld */; };
 		55C0F74416865ECF0072FAB0 /* SDScaffoldAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F73D16865ECF0072FAB0 /* SDScaffoldAddViewController.m */; };
 		55C0F74516865ECF0072FAB0 /* SDScaffoldShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F73F16865ECF0072FAB0 /* SDScaffoldShowViewController.m */; };
-		55C0F74616865ECF0072FAB0 /* SDScaffoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F74116865ECF0072FAB0 /* SDScaffoldViewController.m */; };
+		55C0F74616865ECF0072FAB0 /* SDScaffoldIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F74116865ECF0072FAB0 /* SDScaffoldIndexViewController.m */; };
 		55C0F76316866FD90072FAB0 /* SDPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F76016866FD90072FAB0 /* SDPlaceholderCell.m */; };
 		55C0F76416866FD90072FAB0 /* SDTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F76216866FD90072FAB0 /* SDTextFieldCell.m */; };
 /* End PBXBuildFile section */
@@ -45,8 +45,8 @@
 		55C0F73D16865ECF0072FAB0 /* SDScaffoldAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldAddViewController.m; sourceTree = "<group>"; };
 		55C0F73E16865ECF0072FAB0 /* SDScaffoldShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldShowViewController.h; sourceTree = "<group>"; };
 		55C0F73F16865ECF0072FAB0 /* SDScaffoldShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldShowViewController.m; sourceTree = "<group>"; };
-		55C0F74016865ECF0072FAB0 /* SDScaffoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldViewController.h; sourceTree = "<group>"; };
-		55C0F74116865ECF0072FAB0 /* SDScaffoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldViewController.m; sourceTree = "<group>"; };
+		55C0F74016865ECF0072FAB0 /* SDScaffoldIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldIndexViewController.h; sourceTree = "<group>"; };
+		55C0F74116865ECF0072FAB0 /* SDScaffoldIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldIndexViewController.m; sourceTree = "<group>"; };
 		55C0F74716865EF00072FAB0 /* SDScaffoldKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldKit.h; sourceTree = "<group>"; };
 		55C0F75F16866FD80072FAB0 /* SDPlaceholderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDPlaceholderCell.h; path = ../SDScaffoldKit/SDPlaceholderCell.h; sourceTree = "<group>"; };
 		55C0F76016866FD90072FAB0 /* SDPlaceholderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDPlaceholderCell.m; path = ../SDScaffoldKit/SDPlaceholderCell.m; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 				55C0F73D16865ECF0072FAB0 /* SDScaffoldAddViewController.m */,
 				55C0F73E16865ECF0072FAB0 /* SDScaffoldShowViewController.h */,
 				55C0F73F16865ECF0072FAB0 /* SDScaffoldShowViewController.m */,
-				55C0F74016865ECF0072FAB0 /* SDScaffoldViewController.h */,
-				55C0F74116865ECF0072FAB0 /* SDScaffoldViewController.m */,
+				55C0F74016865ECF0072FAB0 /* SDScaffoldIndexViewController.h */,
+				55C0F74116865ECF0072FAB0 /* SDScaffoldIndexViewController.m */,
 			);
 			name = SDScaffoldKit;
 			path = ../SDScaffoldKit;
@@ -221,7 +221,7 @@
 				55C0F6C816822B5A0072FAB0 /* SDScaffoldExample.xcdatamodeld in Sources */,
 				55C0F74416865ECF0072FAB0 /* SDScaffoldAddViewController.m in Sources */,
 				55C0F74516865ECF0072FAB0 /* SDScaffoldShowViewController.m in Sources */,
-				55C0F74616865ECF0072FAB0 /* SDScaffoldViewController.m in Sources */,
+				55C0F74616865ECF0072FAB0 /* SDScaffoldIndexViewController.m in Sources */,
 				55C0F76316866FD90072FAB0 /* SDPlaceholderCell.m in Sources */,
 				55C0F76416866FD90072FAB0 /* SDTextFieldCell.m in Sources */,
 			);

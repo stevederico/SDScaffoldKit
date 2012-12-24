@@ -40,23 +40,23 @@ Updated Project
 
 12/24
 Updated SDTextFieldCell
+Patched EditViewController
+Changed SDScaffoldViewController to SDScaffoldIndexViewController
+Set Title on ShowViewController
 
 -Add Action Sheet to Delete
-
+-Add Swipe to Delete to Index View
 -Fix Doubles Bug
--Demo With Rack Core Data
 -Add DatePicker Support
--LoginViewController
 
 
-???
--Demo Video
+
+NEXT
+-Demo With Rack Core Data
 -Switches for Booleans
 -Description for Other Objects
--Add Swipe to Delete to Index View
+-LoginViewController
 -Wrap in UiNavigationController?
 -Only show save when required fields are compelted
 -Validation Error Alerts on Add/Edit
--SSPullToRefresh
--Cancel Edit Mode
 -Better Plurals

@@ -18,7 +18,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    SDScaffoldViewController *scaffoldViewController = [[SDScaffoldViewController alloc] initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext]];
+    SDScaffoldIndexViewController *scaffoldViewController = [[SDScaffoldIndexViewController alloc] initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext]];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scaffoldViewController];
     

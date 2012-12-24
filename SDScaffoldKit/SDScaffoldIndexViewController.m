@@ -1,5 +1,5 @@
 //
-//  SDScaffoldViewController.m
+//  SDScaffoldIndexViewController.m
 //  SDScaffoldKit
 //
 //  Created by Steve Derico on 12/18/12.
@@ -8,16 +8,16 @@
 #import "SDScaffoldShowViewController.h"
 #import "SDScaffoldAddViewController.h"
 
-#import "SDScaffoldViewController.h"
+#import "SDScaffoldIndexViewController.h"
 
-@interface SDScaffoldViewController () <NSFetchedResultsControllerDelegate>{
+@interface SDScaffoldIndexViewController () <NSFetchedResultsControllerDelegate>{
     NSString *_sortPropertyName;
 }
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 - (void)showAddViewController;
 @end
 
-@implementation SDScaffoldViewController
+@implementation SDScaffoldIndexViewController
 @synthesize entityName = _entityName;
 @synthesize isEditable = _isEditable;
 @synthesize isDeletable = _isDeletable;
@@ -137,11 +137,17 @@
     
     //Created a showViewController and set it's properties from the index's properties
     SDScaffoldShowViewController *showVC = [[SDScaffoldShowViewController alloc] initWithEntity:[_fetchedResultsController objectAtIndexPath:indexPath] context:self.managedObjectContext];
-    
+
     //Passing Property Values to next ViewController
     showVC.isDeletable = self.isDeletable;
     showVC.isEditable = self.isEditable;
     showVC.entityName = self.entityName;
+    
+    //Locate Object for given row
+    NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    //Set the viewControllers title text to the value of the property used for sorting.
+    showVC.title = [[managedObject valueForKey:_sortPropertyName] description];
     
     //Push new ShowViewController
     [self.navigationController pushViewController:showVC animated:YES];

@@ -1,5 +1,5 @@
 //
-//  SDScaffoldViewController.h
+//  SDScaffoldIndexViewController.h
 //  SDScaffoldKit
 //
 //  Created by Steve Derico on 12/18/12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SDScaffoldViewController : UITableViewController
+@interface SDScaffoldIndexViewController : UITableViewController
 @property(nonatomic,strong) NSString *entityName;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property(nonatomic) BOOL isDeletable;

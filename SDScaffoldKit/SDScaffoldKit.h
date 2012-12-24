@@ -8,7 +8,7 @@
 
 // Views
 //#import "SDScaffoldAddViewController.h"
-#import "SDScaffoldViewController.h"
+#import "SDScaffoldIndexViewController.h"
 //#import "SDScaffoldShowViewController.h"
 
 // Cells
