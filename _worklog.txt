@@ -29,15 +29,23 @@ Updated ReadME
 
 12/19
 Cleaned Up Code & Commented AddViewController
+Add Example to Repo
+Code Cleanup and Comment
+Remove Logs
 
--Add Example to Repo
+12/22
+Create SDScaffoldKit folder
+Create SDScaffoldKit.h 
+Updated Project
+
+-Update SDTextFieldCell
+-Add Action Sheet to Delete
 -Demo Video
 -Fix Doubles Bug
 -Demo With Rack Core Data
 -Fix DatePicker
--Update SDTextFieldCell
--Code Cleanup and Comment
--Remove Logs
+-LoginViewController
+
 
 ???
 -Switches for Booleans

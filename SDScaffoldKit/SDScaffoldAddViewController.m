@@ -85,10 +85,11 @@
     
     static NSString *CellIdentifier = @"Cell";
     
-    ELCTextFieldCell *cell = (ELCTextFieldCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SDPlaceholderCell *cell = (SDPlaceholderCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[ELCTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[SDPlaceholderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.delegate = self;
+//        cell.textField.delegate = self;
     }
     
     [self configureCell:cell forRowAtIndexPath:indexPath];
@@ -96,18 +97,18 @@
     return cell;
 }
 
-- (void)configureCell:(ELCTextFieldCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+- (void)configureCell:(SDTextFieldCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
     //Clear TextField for a clean slate
-    cell.rightTextField.text = @"";
-    
-    //ELCTextField's Delegate uses the indexPath Property, but it is not being set. This fixes it.
+    cell.textField.text = @"";
+    cell.delegate = self;
+//    cell.textField.delegate = self;
     cell.indexPath = indexPath;
     
     //Check if Values are available for given attribute if not, show attribute name in placeholder
     if ([[_values objectAtIndex:indexPath.row] isEqualToString:@""]) {
-        cell.rightTextField.placeholder = [[_attributes objectAtIndex:indexPath.row] description];
+        cell.textField.placeholder = [[_attributes objectAtIndex:indexPath.row] description];
     }else{
-        cell.rightTextField.text = [[_values objectAtIndex:indexPath.row] description];
+        cell.textField.text = [[_values objectAtIndex:indexPath.row] description];
     }
     
     //Create Date Picker for Date AttributeType : This is still a bit buggy :/
@@ -121,48 +122,51 @@
     //Check AttributeType for given attribute, set keyboard accordingly
     switch ([[[_entityDescription attributesByName] valueForKey:[_attributes objectAtIndex:indexPath.row]] attributeType]) {
         case 0:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 100:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 200:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 300:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 400:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 500:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 600:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 700:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDefault;
+            cell.textField.keyboardType = UIKeyboardTypeDefault;
             break;
         case 800:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 900:
         //Add Date Picker with tag to refer to in datepicker delegate.
             datePicker.tag = indexPath.row;
-            cell.rightTextField.inputView = datePicker;
+            cell.textField.inputView = datePicker;
             break;
         default:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDefault; 
+            cell.textField.keyboardType = UIKeyboardTypeDefault;
             break;
     } 
 }
 
-#pragma mark - ELCTextFieldCellDelegate
+#pragma mark - SDTextFieldDelegate
 
-- (void)textFieldCell:(ELCTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
+- (void)textFieldCell:(SDTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
 
     //Add current input to values array, remove old object and insert new until entry is finished.
+    
+    NSLog(@"inValue %@",inValue);
+    
     if ([_values count] > 0) {
         [_values removeObjectAtIndex:inIndexPath.row];
         [_values insertObject:inValue atIndex:inIndexPath.row];
@@ -183,7 +187,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:s.tag inSection:0];
     
     //Reference cell to be updated
-    ELCTextFieldCell *cell = (ELCTextFieldCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    SDTextFieldCell *cell = (SDTextFieldCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     
     //Update cell and add date to values instance variable.
     [self textFieldCell:cell updateTextLabelAtIndexPath:indexPath string:s.date.description];

@@ -5,7 +5,7 @@
 //  Created by Steve Derico on 12/18/12.
 //  Copyright (c) 2012 Bixby Apps. All rights reserved.
 //
-#import "ELCTextFieldCell.h"
+#import "SDTextFieldCell.h"
 #import "SDScaffoldShowViewController.h"
 
 @interface SDScaffoldShowViewController (){
@@ -91,11 +91,11 @@
         static NSString *textFieldID = @"CellText";
         
         //Try to Dequeue Cell if possible
-        ELCRightTextFieldCell *cell = (ELCRightTextFieldCell*)[tableView dequeueReusableCellWithIdentifier:textFieldID];
+        SDTextFieldCell *cell = (SDTextFieldCell*)[tableView dequeueReusableCellWithIdentifier:textFieldID];
         
         //If no dequeued cell then create new with indentifer
         if (cell == nil) {
-            cell = [[ELCRightTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:textFieldID];
+            cell = [[SDTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:textFieldID];
         }
         
         //Configure Edit Cell
@@ -129,21 +129,21 @@
     return NO;
 }
 
-- (void)configureEditCell:(ELCTextFieldCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+- (void)configureEditCell:(SDTextFieldCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
         
     cell.indexPath = indexPath;
     cell.delegate = self;
     
     //Set Text Labels
-    cell.rightTextField.text = @"";
+    cell.textField.text = @"";
     cell.textLabel.text = [[_attributes objectAtIndex:indexPath.row] capitalizedString];
-    cell.rightTextField.placeholder = [[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description];
+    cell.textField.placeholder = [[_entity valueForKey:[_attributes objectAtIndex:indexPath.row]] description];
 
     //If there is no value for attribute then put attribute name in placeholder
     if ([[_values objectAtIndex:indexPath.row] isEqualToString:@""]) {
-        cell.rightTextField.placeholder = [[_attributes objectAtIndex:indexPath.row] description];
+        cell.textField.placeholder = [[_attributes objectAtIndex:indexPath.row] description];
     } else {
-        cell.rightTextField.text = [[_values objectAtIndex:indexPath.row] description];
+        cell.textField.text = [[_values objectAtIndex:indexPath.row] description];
     }
     
     //Create UIDatePicker first time and then reference it afterwards
@@ -157,38 +157,38 @@
     
     switch ([[[_entityDescription attributesByName] valueForKey:[_attributes objectAtIndex:indexPath.row]] attributeType]) {
         case 0:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 100:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 200:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 300:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 400:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 500:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 600:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDecimalPad;
+            cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
         case 700:
-            cell.rightTextField.keyboardType = UIKeyboardTypeDefault;
+            cell.textField.keyboardType = UIKeyboardTypeDefault;
             break;
         case 800:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 900:
             datePicker.tag = indexPath.row;
-            cell.rightTextField.inputView = datePicker;
+            cell.textField.inputView = datePicker;
             break;
         default:
-            cell.rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             break;
     } 
 }
@@ -225,7 +225,7 @@
 
 #pragma mark - ELCTextField Delegate
 
-- (void)textFieldCell:(ELCTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
+- (void)textFieldCell:(SDTextFieldCell *)inCell updateTextLabelAtIndexPath:(NSIndexPath *)inIndexPath string:(NSString *)inValue{
 
     NSString *stringValue = [inValue description];
     NSNumber *intValue = [NSNumber numberWithInt:[inValue integerValue]];

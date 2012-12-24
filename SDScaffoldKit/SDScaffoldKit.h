@@ -7,10 +7,9 @@
 //
 
 // Views
-#import "SDScaffoldAddViewController.h"
+//#import "SDScaffoldAddViewController.h"
 #import "SDScaffoldViewController.h"
-#import "SDScaffoldShowViewController.h"
+//#import "SDScaffoldShowViewController.h"
 
 // Cells
-#import "ELCRightTextFieldCell.h"
-#import "ELCTextFieldCell.h"
+//#import "SDTextFieldCell.h"

@@ -7,6 +7,7 @@
 //
 #import "SDScaffoldShowViewController.h"
 #import "SDScaffoldAddViewController.h"
+
 #import "SDScaffoldViewController.h"
 
 @interface SDScaffoldViewController () <NSFetchedResultsControllerDelegate>{

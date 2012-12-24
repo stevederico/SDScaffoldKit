@@ -18,11 +18,11 @@
 		55C0F6C316822B5A0072FAB0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C0F6C216822B5A0072FAB0 /* Default@2x.png */; };
 		55C0F6C516822B5A0072FAB0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C0F6C416822B5A0072FAB0 /* Default-568h@2x.png */; };
 		55C0F6C816822B5A0072FAB0 /* SDScaffoldExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F6C616822B5A0072FAB0 /* SDScaffoldExample.xcdatamodeld */; };
-		55C0F74216865ECF0072FAB0 /* ELCRightTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F73916865ECF0072FAB0 /* ELCRightTextFieldCell.m */; };
-		55C0F74316865ECF0072FAB0 /* ELCTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F73B16865ECF0072FAB0 /* ELCTextFieldCell.m */; };
 		55C0F74416865ECF0072FAB0 /* SDScaffoldAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F73D16865ECF0072FAB0 /* SDScaffoldAddViewController.m */; };
 		55C0F74516865ECF0072FAB0 /* SDScaffoldShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F73F16865ECF0072FAB0 /* SDScaffoldShowViewController.m */; };
 		55C0F74616865ECF0072FAB0 /* SDScaffoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F74116865ECF0072FAB0 /* SDScaffoldViewController.m */; };
+		55C0F76316866FD90072FAB0 /* SDPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F76016866FD90072FAB0 /* SDPlaceholderCell.m */; };
+		55C0F76416866FD90072FAB0 /* SDTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F76216866FD90072FAB0 /* SDTextFieldCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,10 +41,6 @@
 		55C0F6C216822B5A0072FAB0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		55C0F6C416822B5A0072FAB0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		55C0F6C716822B5A0072FAB0 /* SDScaffoldExample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SDScaffoldExample.xcdatamodel; sourceTree = "<group>"; };
-		55C0F73816865ECF0072FAB0 /* ELCRightTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCRightTextFieldCell.h; sourceTree = "<group>"; };
-		55C0F73916865ECF0072FAB0 /* ELCRightTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCRightTextFieldCell.m; sourceTree = "<group>"; };
-		55C0F73A16865ECF0072FAB0 /* ELCTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCTextFieldCell.h; sourceTree = "<group>"; };
-		55C0F73B16865ECF0072FAB0 /* ELCTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCTextFieldCell.m; sourceTree = "<group>"; };
 		55C0F73C16865ECF0072FAB0 /* SDScaffoldAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldAddViewController.h; sourceTree = "<group>"; };
 		55C0F73D16865ECF0072FAB0 /* SDScaffoldAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldAddViewController.m; sourceTree = "<group>"; };
 		55C0F73E16865ECF0072FAB0 /* SDScaffoldShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldShowViewController.h; sourceTree = "<group>"; };
@@ -52,6 +48,10 @@
 		55C0F74016865ECF0072FAB0 /* SDScaffoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldViewController.h; sourceTree = "<group>"; };
 		55C0F74116865ECF0072FAB0 /* SDScaffoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldViewController.m; sourceTree = "<group>"; };
 		55C0F74716865EF00072FAB0 /* SDScaffoldKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldKit.h; sourceTree = "<group>"; };
+		55C0F75F16866FD80072FAB0 /* SDPlaceholderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDPlaceholderCell.h; path = ../SDScaffoldKit/SDPlaceholderCell.h; sourceTree = "<group>"; };
+		55C0F76016866FD90072FAB0 /* SDPlaceholderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDPlaceholderCell.m; path = ../SDScaffoldKit/SDPlaceholderCell.m; sourceTree = "<group>"; };
+		55C0F76116866FD90072FAB0 /* SDTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDTextFieldCell.h; path = ../SDScaffoldKit/SDTextFieldCell.h; sourceTree = "<group>"; };
+		55C0F76216866FD90072FAB0 /* SDTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDTextFieldCell.m; path = ../SDScaffoldKit/SDTextFieldCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +89,7 @@
 		55C0F6AB16822B5A0072FAB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55C0F73716865ECF0072FAB0 /* SDScaffoldKit */,
 				55C0F6AC16822B5A0072FAB0 /* UIKit.framework */,
 				55C0F6AE16822B5A0072FAB0 /* Foundation.framework */,
 				55C0F6B016822B5A0072FAB0 /* CoreGraphics.framework */,
@@ -111,7 +112,6 @@
 		55C0F6B516822B5A0072FAB0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55C0F73716865ECF0072FAB0 /* SDScaffoldKit */,
 				55C0F6B616822B5A0072FAB0 /* SDScaffoldExample-Info.plist */,
 				55C0F6B716822B5A0072FAB0 /* InfoPlist.strings */,
 				55C0F6BA16822B5A0072FAB0 /* main.m */,
@@ -127,10 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				55C0F74716865EF00072FAB0 /* SDScaffoldKit.h */,
-				55C0F73816865ECF0072FAB0 /* ELCRightTextFieldCell.h */,
-				55C0F73916865ECF0072FAB0 /* ELCRightTextFieldCell.m */,
-				55C0F73A16865ECF0072FAB0 /* ELCTextFieldCell.h */,
-				55C0F73B16865ECF0072FAB0 /* ELCTextFieldCell.m */,
+				55C0F7651688A41F0072FAB0 /* Cells */,
 				55C0F73C16865ECF0072FAB0 /* SDScaffoldAddViewController.h */,
 				55C0F73D16865ECF0072FAB0 /* SDScaffoldAddViewController.m */,
 				55C0F73E16865ECF0072FAB0 /* SDScaffoldShowViewController.h */,
@@ -139,7 +136,19 @@
 				55C0F74116865ECF0072FAB0 /* SDScaffoldViewController.m */,
 			);
 			name = SDScaffoldKit;
-			path = ../../SDScaffoldKit;
+			path = ../SDScaffoldKit;
+			sourceTree = "<group>";
+		};
+		55C0F7651688A41F0072FAB0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				55C0F76116866FD90072FAB0 /* SDTextFieldCell.h */,
+				55C0F76216866FD90072FAB0 /* SDTextFieldCell.m */,
+				55C0F75F16866FD80072FAB0 /* SDPlaceholderCell.h */,
+				55C0F76016866FD90072FAB0 /* SDPlaceholderCell.m */,
+			);
+			name = Cells;
+			path = ../SDScaffoldExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,11 +219,11 @@
 				55C0F6BB16822B5A0072FAB0 /* main.m in Sources */,
 				55C0F6BF16822B5A0072FAB0 /* AppDelegate.m in Sources */,
 				55C0F6C816822B5A0072FAB0 /* SDScaffoldExample.xcdatamodeld in Sources */,
-				55C0F74216865ECF0072FAB0 /* ELCRightTextFieldCell.m in Sources */,
-				55C0F74316865ECF0072FAB0 /* ELCTextFieldCell.m in Sources */,
 				55C0F74416865ECF0072FAB0 /* SDScaffoldAddViewController.m in Sources */,
 				55C0F74516865ECF0072FAB0 /* SDScaffoldShowViewController.m in Sources */,
 				55C0F74616865ECF0072FAB0 /* SDScaffoldViewController.m in Sources */,
+				55C0F76316866FD90072FAB0 /* SDPlaceholderCell.m in Sources */,
+				55C0F76416866FD90072FAB0 /* SDTextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
