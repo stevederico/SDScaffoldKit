@@ -288,12 +288,10 @@
 }
 
 - (void)deleteTapped{
-    //Delete Object and Save Context
-    [self.managedObjectContext deleteObject:_entity];
-    [self.managedObjectContext save:nil];
     
-    //Pop Navigation Controller
-    [self.navigationController popViewControllerAnimated:YES];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
+    
 }
 
 
@@ -308,6 +306,21 @@
     
     [self.tableView reloadData];
     
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 0) {
+        //Delete Object and Save Context
+        [self.managedObjectContext deleteObject:_entity];
+        [self.managedObjectContext save:nil];
+
+        //Pop Navigation Controller
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
 }
 
 @end

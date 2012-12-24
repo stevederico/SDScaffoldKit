@@ -43,9 +43,9 @@ Updated SDTextFieldCell
 Patched EditViewController
 Changed SDScaffoldViewController to SDScaffoldIndexViewController
 Set Title on ShowViewController
+Added Swipe to Delete to Index View
+Added Action Sheet to Delete
 
--Add Action Sheet to Delete
--Add Swipe to Delete to Index View
 -Fix Doubles Bug
 -Add DatePicker Support
 

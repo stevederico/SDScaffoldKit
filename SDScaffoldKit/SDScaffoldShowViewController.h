@@ -8,7 +8,7 @@
 #import "SDTextFieldCell.h"
 #import <UIKit/UIKit.h>
 
-@interface SDScaffoldShowViewController : UITableViewController <SDTextFieldCellDelegate>
+@interface SDScaffoldShowViewController : UITableViewController <SDTextFieldCellDelegate, UIActionSheetDelegate>
 @property(nonatomic,strong) NSString *entityName;
 @property(nonatomic,strong) id entity;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
