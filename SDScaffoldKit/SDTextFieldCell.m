@@ -20,6 +20,7 @@
         _textField.clearsOnBeginEditing = NO;
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.textAlignment = NSTextAlignmentLeft;
+        _textField.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
         _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [_textField setDelegate:self];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
