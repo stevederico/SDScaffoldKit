@@ -45,7 +45,9 @@
         
         //Populate AttributeTypes Array
         for (NSPropertyDescription *property in _entityDescription) {
-            [_attributeTypes addObject:[property valueForKey:@"attributeType"]];
+            if ([property isKindOfClass:[NSAttributeDescription class]]) {
+                [_attributeTypes addObject:[property valueForKey:@"attributeType"]];
+            }
         }
         
         //Fill Values Array with Dummy Data
