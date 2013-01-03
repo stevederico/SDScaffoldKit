@@ -1,5 +1,4 @@
 SDScaffoldKit
-[![Build Status](https://travis-ci.org/stevederico/SDScaffoldKit.png)](https://travis-ci.org/stevederico/SDScaffoldKit)
 =======
 **Scaffolding for Core Data Models**
 
@@ -69,5 +68,7 @@ Steve Derico
 - steve@deri.co
 
 ## License
+
+[![Build Status](https://travis-ci.org/stevederico/SDScaffoldKit.png)](https://travis-ci.org/stevederico/SDScaffoldKit)
 
 SDScaffoldKit is available under the MIT license. See the LICENSE file for more info.
