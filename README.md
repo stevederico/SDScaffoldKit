@@ -1,4 +1,5 @@
 SDScaffoldKit
+[![Build Status](https://travis-ci.org/stevederico/SDScaffoldKit.png)](https://travis-ci.org/stevederico/SDScaffoldKit)
 =======
 **Scaffolding for Core Data Models**
 
