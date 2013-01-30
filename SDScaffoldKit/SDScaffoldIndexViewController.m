@@ -172,7 +172,7 @@
         [self.managedObjectContext deleteObject:managedObject];
         [self.managedObjectContext save:nil];
         
-        [self refreshData];
+
     }
 }
 
