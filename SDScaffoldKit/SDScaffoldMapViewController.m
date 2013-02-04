@@ -1,19 +1,20 @@
 //
-//  MapViewController.m
-//  ParkPro
+//  SDScaffoldMapViewController.m
+//  SDScaffoldKit
 //
 //  Created by Steve Derico on 12/11/12.
 //  Copyright (c) 2012 Bixby Apps. All rights reserved.
 //
 
-#import "MapViewController.h"
+#import "SDScaffoldMapViewController.h"
 
-@interface MapViewController () <NSFetchedResultsControllerDelegate>
+@interface SDScaffoldMapViewController () <NSFetchedResultsControllerDelegate>
 @property NSFetchedResultsController *fetchedResultsController;
 @end
 
-@implementation MapViewController
+@implementation SDScaffoldMapViewController
 @synthesize managedObjectContext;
+@synthesize entityName;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +31,7 @@
     [super viewDidLoad];
     
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Spot"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"price" ascending:YES]];
     
     [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
