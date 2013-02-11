@@ -1,5 +1,8 @@
 SDScaffoldKit
 =======
+
+##If you enjoy SDScaffoldkit, check out [SDScaffoldSync](https://github.com/stevederico/SDScaffoldSync)- The easiest way to create a cloud syncing mobile app.
+
 **Scaffolding for Core Data Models**
 
 UIKit can be tedious and repeative to build simple CRUD interfaces. SDScaffoldKit is a simple library that provides Create, Read, Update, and Delete views/viewcontrollers out-of-the-box. Just create your Core Data model, hand it your Entity's name, a field to sort by, and BAM! You are ready to start creating and managing objects.
