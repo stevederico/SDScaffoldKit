@@ -1,7 +1,7 @@
 SDScaffoldKit
 =======
 
-##Check out [SDScaffoldSync](https://github.com/stevederico/SDScaffoldSync)- Create a cloud syncing mobile app in 3 minutes.
+###Check out [SDScaffoldSync](https://github.com/stevederico/SDScaffoldSync)- Create a cloud syncing mobile app in 3 minutes.
 
 **Scaffolding for Core Data Models**
 
