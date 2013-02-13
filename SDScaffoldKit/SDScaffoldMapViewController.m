@@ -34,8 +34,11 @@
         self.entityName = entityName;
         self.managedObjectContext = managedObjectContext;
         self.title = [NSString stringWithFormat:@"%@s",self.entityName];
-            
-        [self refreshData];
+        
+       
+        
+       
+        
     }
     return self;
 }
@@ -56,21 +59,26 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     
+       [self refreshData];
 }
 
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
-    [self.mapView setDelegate:self];
-    [self.mapView setShowsUserLocation:YES];
-    [self.mapView setZoomEnabled:YES];
-    [self.mapView setScrollEnabled:YES];
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-
-    [self.view addSubview:self.mapView];
     
-    [self refreshData];
+ 
+    if (self.mapView == nil) {
+        self.mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+        [self.mapView setDelegate:self];
+        [self.mapView setShowsUserLocation:YES];
+        [self.mapView setZoomEnabled:YES];
+        [self.mapView setScrollEnabled:YES];
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+        [self.view addSubview:self.mapView];
+    }
+    
+ [self refreshData];
+  
 
 }
 
@@ -94,7 +102,13 @@
         location.latitude = [[point valueForKey:@"latitude"] doubleValue];
         location.longitude = [[point valueForKey:@"longitude"] doubleValue];
         
-        NSString *locationTitle = [NSString stringWithFormat:@"%f,%f",location.latitude, location.longitude];
+        NSString *locationTitle;
+        
+        if ([[point valueForKey:@"title"] length]>0) {
+            locationTitle = [point valueForKey:@"title"];
+        }else{
+           locationTitle  = [NSString stringWithFormat:@"%f,%f",location.latitude, location.longitude];
+        }
         
         SDMapPoint *destination = [[SDMapPoint alloc] initWithTitle:locationTitle andCoordinate:location];
         
