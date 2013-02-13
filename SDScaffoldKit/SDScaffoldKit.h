@@ -8,11 +8,13 @@
 
 // Views
 
-#import "SDScaffoldIndexViewController.h"
+
 #import "SDPlaceholderCell.h"
 #import "SDMapPoint.h"
+#import "SDScaffoldIndexViewController.h"
 #import "SDScaffoldShowViewController.h"
 #import "SDScaffoldAddViewController.h"
+#import "SDScaffoldMapViewController.h"
 #import "SDTextFieldCell.h"
 // Cells
 

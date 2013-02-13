@@ -48,11 +48,10 @@
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:_propertyName ascending:YES]];
     
     [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+ 
     
-    [self.mapView setShowsUserLocation:YES];
-    [self.mapView setZoomEnabled:YES];
-    [self.mapView setScrollEnabled:YES];
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStyleBordered target:self action:@selector(refreshData)];
+    self.navigationItem.rightBarButtonItem = refreshButton;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -62,6 +61,14 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+    [self.mapView setDelegate:self];
+    [self.mapView setShowsUserLocation:YES];
+    [self.mapView setZoomEnabled:YES];
+    [self.mapView setScrollEnabled:YES];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+
+    [self.view addSubview:self.mapView];
     
     [self refreshData];
 
@@ -87,9 +94,11 @@
         location.latitude = [[point valueForKey:@"latitude"] doubleValue];
         location.longitude = [[point valueForKey:@"longitude"] doubleValue];
         
-//        NSLog(@"Spot id %@: %@",[[[[spot objectID] URIRepresentation] lastPathComponent] stringByReplacingOccurrencesOfString:@"p__af_" withString:@""], spot.title.description);
+        NSString *locationTitle = [NSString stringWithFormat:@"%f,%f",location.latitude, location.longitude];
         
-        SDMapPoint *destination = [[SDMapPoint alloc] initWithTitle:point.description andCoordinate:location];
+        SDMapPoint *destination = [[SDMapPoint alloc] initWithTitle:locationTitle andCoordinate:location];
+        
+        destination.object = point;
         
         [self.mapView addAnnotation:destination];
     }
@@ -103,42 +112,42 @@
 }
 
 
-//- (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-//
-////    if (annotation.class != [SDMapPoint class]) {
-////        return nil;
-////    }
-////
-////    static NSString *reuseId = @"RightStandardPin";
-////
-////    MKPinAnnotationView *aView = (MKPinAnnotationView *)[mapView                                                        dequeueReusableAnnotationViewWithIdentifier:reuseId];
-////        
-////    if (aView == nil){
-////       aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-////    }
-////        
-////    aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-////
-////    aView.canShowCallout = YES;
-////    aView.annotation = annotation;
-////    
-//    return aView;
-//    
-//}
+- (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
 
-//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-//   
-////    SDMapPoint *myPoint = view.annotation;
-////    
-////    if (myPoint.class != [SDMapPoint class]) {
-////        return;
-////    }
-//    
-////    SDScaffoldShowViewController *lvc = [[SDScaffoldShowViewController alloc] initWithEntity:<#(id)#> context:<#(NSManagedObjectContext *)#>];
-////    
-////
-////    [self.navigationController pushViewController:lvc animated:YES];
-//    
-//}
+    if (annotation.class != [SDMapPoint class]) {
+        return nil;
+    }
+
+    static NSString *reuseId = @"RightStandardPin";
+
+    MKPinAnnotationView *aView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+        
+    if (aView == nil){
+       aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+    }
+        
+    aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+    aView.canShowCallout = YES;
+    aView.annotation = annotation;
+
+    return aView;
+    
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+   
+    SDMapPoint *myPoint = view.annotation;
+    
+    if (myPoint.class != [SDMapPoint class]) {
+        return;
+    }
+    
+    SDScaffoldShowViewController *lvc = [[SDScaffoldShowViewController alloc] initWithEntity:myPoint.object context:self.managedObjectContext];
+    
+
+    [self.navigationController pushViewController:lvc animated:YES];
+    
+}
 
 @end

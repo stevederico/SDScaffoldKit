@@ -18,7 +18,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    SDScaffoldIndexViewController *scaffoldViewController = [[SDScaffoldIndexViewController alloc] initWithEntityName:@"User" sortBy:@"lastname" context:[self managedObjectContext]];
+//    SDScaffoldIndexViewController *scaffoldViewController = [[SDScaffoldIndexViewController alloc] initWithEntityName:@"Point" sortBy:@"latitude" context:[self managedObjectContext]];
+
+    SDScaffoldMapViewController *scaffoldViewController = [[SDScaffoldMapViewController alloc] initWithEntityName:@"Point" sortBy:@"latitude" context:[self managedObjectContext]];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scaffoldViewController];
     

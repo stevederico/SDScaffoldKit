@@ -9,7 +9,7 @@
 #import "SDMapPoint.h"
 
 @implementation SDMapPoint
-
+@synthesize object = _object;
 @synthesize title = _title;
 @synthesize coordinate = _coordinate;
 - (id)initWithTitle:(NSString *)ttl andCoordinate:(CLLocationCoordinate2D)c2d{

@@ -15,6 +15,6 @@
 @property (nonatomic, strong) NSString *propertyName;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-
+- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)propertyName context:(NSManagedObjectContext*)managedObjectContext;
 
 @end

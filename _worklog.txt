@@ -49,9 +49,14 @@ Added Action Sheet to Delete
 
 2/14
 Release SDScaffoldSync - Demo with Rack-Core-Data
+Added MapPoints
+Added SDMapViewController
+
+
 
 NEXT
--Add Map View
+- Add AutoDetect SDMapView
+- Push to SDShow from SDMapView
 -Fix Doubles Bug
 -Add DatePicker Support
 -Switches for Booleans

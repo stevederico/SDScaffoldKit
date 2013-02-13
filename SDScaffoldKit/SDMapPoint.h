@@ -12,6 +12,7 @@
 
 @interface SDMapPoint : NSObject <MKAnnotation>
 
+@property (nonatomic, strong) NSObject *object;
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
