@@ -8,31 +8,44 @@
 
 #import "SDScaffoldMapViewController.h"
 
+
+@protocol SDMapPointProtocol <NSObject>
+
+@property (nonatomic, readonly) NSNumber *latitude;
+@property (nonatomic, readonly) NSNumber *longitude;
+
+@end
+
 @interface SDScaffoldMapViewController () <NSFetchedResultsControllerDelegate>
 @property NSFetchedResultsController *fetchedResultsController;
+
 @end
 
 @implementation SDScaffoldMapViewController
-@synthesize managedObjectContext;
-@synthesize entityName;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-  
-        
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize entityName = _entityName, propertyName = _propertyName;
 
+- (id)initWithEntityName:(NSString*)entityName sortBy:(NSString*)propertyName context:(NSManagedObjectContext*)managedObjectContext {
+    
+    self = [super init];
+    if (self) {
+        //Setup Properties
+        self.propertyName = propertyName;
+        self.entityName = entityName;
+        self.managedObjectContext = managedObjectContext;
+        self.title = [NSString stringWithFormat:@"%@s",self.entityName];
+            
+        [self refreshData];
     }
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"price" ascending:YES]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:_entityName];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:_propertyName ascending:YES]];
     
     [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
@@ -41,151 +54,91 @@
     [self.mapView setScrollEnabled:YES];
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
-    self.title = NSLocalizedString(@"Spots", nil);
-    
-//    UIImage *iconImage = [UIImage imageNamed:@"contact"];
-//    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 61, 30)];
-//    [button addTarget:self action:@selector(showAccount) forControlEvents:UIControlEventTouchUpInside];
-//    [button setBackgroundImage:iconImage forState:UIControlStateNormal];
-//    UIBarButtonItem *accountButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    
-
-    UIBarButtonItem *accountButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showAccount)];
-    self.navigationItem.leftBarButtonItem = accountButton;
-    
-    UIBarButtonItem *listButton = [[UIBarButtonItem alloc] initWithTitle:@"LIST" style:UIBarButtonItemStyleBordered target:self action:@selector(showListView)];
-    self.navigationItem.rightBarButtonItem = listButton;
-    
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     
-
-    
-
 }
+
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-        [self getSpots];
+    [self refreshData];
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-- (void)showListView{
-    
-    SpotsViewController  *svc = [[SpotsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    svc.managedObjectContext = self.managedObjectContext;
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:svc];
-    navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    
-    [self.navigationController presentViewController:navController animated:YES completion:nil];
-    
-}
+- (void)refreshData{
 
-
-- (void)showAccount{
-    
-    AccountViewController  *accountViewController = [[AccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:accountViewController];
-    
-    [self.navigationController presentViewController:navController animated:YES completion:nil];
-    
-}
-
-- (void)getSpots{
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Spot"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"price" ascending:YES]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:self.entityName];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:self.propertyName ascending:YES]];
     
     NSArray *objects = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
 
-    [self plotSpots:objects];
+    [self plotPoints:objects];
 
 }
 
-- (void)plotSpots:(NSArray*)spots{
 
-    for (Spot *spot in spots) {
+- (void)plotPoints:(NSArray*)points{
+
+    for (NSManagedObject *point in points) {
         CLLocationCoordinate2D location;
-        location.latitude = spot.latitude.doubleValue;
-        location.longitude = spot.longitude.doubleValue;
+        location.latitude = [[point valueForKey:@"latitude"] doubleValue];
+        location.longitude = [[point valueForKey:@"longitude"] doubleValue];
         
-        NSLog(@"Spot id %@: %@",[[[[spot objectID] URIRepresentation] lastPathComponent] stringByReplacingOccurrencesOfString:@"p__af_" withString:@""], spot.title.description);
+//        NSLog(@"Spot id %@: %@",[[[[spot objectID] URIRepresentation] lastPathComponent] stringByReplacingOccurrencesOfString:@"p__af_" withString:@""], spot.title.description);
         
-        MapPoint *destination = [[MapPoint alloc] initWithTitle:spot.title andCoordinate:location];
-
-        destination.spot = spot;
+        SDMapPoint *destination = [[SDMapPoint alloc] initWithTitle:point.description andCoordinate:location];
+        
         [self.mapView addAnnotation:destination];
     }
 }
 
 
-
 - (IBAction)refreshTapped:(id)sender {
+    [self refreshData];
     
-    [self getSpots];
-    
-    self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
-    
+    self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;    
 }
 
 
-- (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+//- (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+//
+////    if (annotation.class != [SDMapPoint class]) {
+////        return nil;
+////    }
+////
+////    static NSString *reuseId = @"RightStandardPin";
+////
+////    MKPinAnnotationView *aView = (MKPinAnnotationView *)[mapView                                                        dequeueReusableAnnotationViewWithIdentifier:reuseId];
+////        
+////    if (aView == nil){
+////       aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+////    }
+////        
+////    aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+////
+////    aView.canShowCallout = YES;
+////    aView.annotation = annotation;
+////    
+//    return aView;
+//    
+//}
 
-    if (annotation.class != [MapPoint class]) {
-        return nil;
-    }
-
-    static NSString *reuseId = @"RightStandardPin";
-
-    MKPinAnnotationView *aView = (MKPinAnnotationView *)[mapView                                                        dequeueReusableAnnotationViewWithIdentifier:reuseId];
-        
-    if (aView == nil){
-       aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-    }
-        
-    aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-
-    aView.canShowCallout = YES;
-    aView.annotation = annotation;
-    
-    return aView;
-    
-}
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view
-calloutAccessoryControlTapped:(UIControl *)control
-{
-   
-    MapPoint *myPoint = view.annotation;
-    
-    if (myPoint.class != [MapPoint class]) {
-        return;
-    }
-    
-    ListingViewController *lvc = [[ListingViewController alloc] initWithSpot:myPoint.spot];
-    
-     NSLog(@"The SPOT %@", myPoint.spot);
-    [self.navigationController pushViewController:lvc animated:YES];
-    
-}
-
-- (IBAction)pageCurlTapped:(id)sender {
-    
-    MapDetailsViewController *mdvc = [[MapDetailsViewController alloc] init];
-    mdvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-    
-    [self presentViewController:mdvc animated:YES completion:nil];
-
-
-}
+//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+//   
+////    SDMapPoint *myPoint = view.annotation;
+////    
+////    if (myPoint.class != [SDMapPoint class]) {
+////        return;
+////    }
+//    
+////    SDScaffoldShowViewController *lvc = [[SDScaffoldShowViewController alloc] initWithEntity:<#(id)#> context:<#(NSManagedObjectContext *)#>];
+////    
+////
+////    [self.navigationController pushViewController:lvc animated:YES];
+//    
+//}
 
 @end

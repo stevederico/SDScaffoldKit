@@ -7,9 +7,12 @@
 //
 
 // Views
-//#import "SDScaffoldAddViewController.h"
-#import "SDScaffoldIndexViewController.h"
-//#import "SDScaffoldShowViewController.h"
 
+#import "SDScaffoldIndexViewController.h"
+#import "SDPlaceholderCell.h"
+#import "SDMapPoint.h"
+#import "SDScaffoldShowViewController.h"
+#import "SDScaffoldAddViewController.h"
+#import "SDTextFieldCell.h"
 // Cells
-//#import "SDTextFieldCell.h"
+

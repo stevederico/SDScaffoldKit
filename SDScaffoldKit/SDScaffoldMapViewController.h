@@ -10,10 +10,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SDScaffoldMapViewController : UIViewController <MKMapViewDelegate>
-@property (strong, nonatomic) MKMapView *mapView;
-@property(nonatomic,strong) NSString *entityName;
-@property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
-- (IBAction)refreshTapped:(id)sender;
-- (IBAction)pageCurlTapped:(id)sender;
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) NSString *entityName;
+@property (nonatomic, strong) NSString *propertyName;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+
 
 @end

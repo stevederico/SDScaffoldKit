@@ -35,7 +35,7 @@ Remove Logs
 
 12/22
 Create SDScaffoldKit folder
-Create SDScaffoldKit.h 
+Create SDScaffoldKit.h
 Updated Project
 
 12/24
@@ -46,13 +46,14 @@ Set Title on ShowViewController
 Added Swipe to Delete to Index View
 Added Action Sheet to Delete
 
--Fix Doubles Bug
--Add DatePicker Support
 
-
+2/14
+Release SDScaffoldSync - Demo with Rack-Core-Data
 
 NEXT
--Demo With Rack Core Data
+-Add Map View
+-Fix Doubles Bug
+-Add DatePicker Support
 -Switches for Booleans
 -Description for Other Objects
 -LoginViewController

@@ -9,6 +9,8 @@
 #endif
 
 #ifdef __OBJC__
+    #import "SDScaffoldKit.h"
+    #import <MapKit/MapKit.h>
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
