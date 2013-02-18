@@ -34,11 +34,7 @@
         self.entityName = entityName;
         self.managedObjectContext = managedObjectContext;
         self.title = [NSString stringWithFormat:@"%@s",self.entityName];
-        
-       
-        
-       
-        
+    
     }
     return self;
 }
@@ -51,10 +47,12 @@
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:_propertyName ascending:YES]];
     
     [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
- 
     
-    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStyleBordered target:self action:@selector(refreshData)];
-    self.navigationItem.rightBarButtonItem = refreshButton;
+    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
+    self.navigationItem.leftBarButtonItem = refreshButton;
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTapped)];
+    self.navigationItem.rightBarButtonItem = addButton;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -66,7 +64,6 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
- 
     if (self.mapView == nil) {
         self.mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
         [self.mapView setDelegate:self];
@@ -104,7 +101,7 @@
         
         NSString *locationTitle;
         
-        if ([[point valueForKey:@"title"] length]>0) {
+        if ([point respondsToSelector:@selector(title)]) {
             locationTitle = [point valueForKey:@"title"];
         }else{
            locationTitle  = [NSString stringWithFormat:@"%f,%f",location.latitude, location.longitude];
@@ -123,6 +120,16 @@
     [self refreshData];
     
     self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;    
+}
+
+- (void)addTapped{
+    
+        //Create new addViewController
+    SDScaffoldAddViewController *addVC = [[SDScaffoldAddViewController alloc]initWithEntityName:self.entityName context:self.managedObjectContext];
+    
+        //Push new addViewController
+    [self.navigationController pushViewController:addVC animated:YES];
+    
 }
 
 
@@ -158,6 +165,7 @@
     }
     
     SDScaffoldShowViewController *lvc = [[SDScaffoldShowViewController alloc] initWithEntity:myPoint.object context:self.managedObjectContext];
+    lvc.title = myPoint.title;
     
 
     [self.navigationController pushViewController:lvc animated:YES];

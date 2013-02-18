@@ -54,6 +54,15 @@ Added SDMapViewController
 Added Push to SDShow
 Added Support to for title in SDMapPoint
 
+2/17
+Fixed KVO check for Title Bug
+Added Titles to ShowViewController from MapView
+Added New Item Button to MapView
+
+-Figure out what to do with MapKt
+
+-Add MapKit Warnings
+-Comment out maps by default
 
 
 
