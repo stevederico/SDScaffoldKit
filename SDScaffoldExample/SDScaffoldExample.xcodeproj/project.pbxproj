@@ -25,7 +25,6 @@
 		55C0F76316866FD90072FAB0 /* SDPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F76016866FD90072FAB0 /* SDPlaceholderCell.m */; };
 		55C0F76416866FD90072FAB0 /* SDTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C0F76216866FD90072FAB0 /* SDTextFieldCell.m */; };
 		7B74435E16BA5F7400D98429 /* SDScaffoldMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74435C16BA5F7400D98429 /* SDScaffoldMapViewController.m */; };
-		7BB0375216D1FADB001545E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB0375116D1FADB001545E4 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +58,6 @@
 		55C0F76216866FD90072FAB0 /* SDTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDTextFieldCell.m; path = ../SDScaffoldKit/SDTextFieldCell.m; sourceTree = "<group>"; };
 		7B74435B16BA5F7400D98429 /* SDScaffoldMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScaffoldMapViewController.h; sourceTree = "<group>"; };
 		7B74435C16BA5F7400D98429 /* SDScaffoldMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScaffoldMapViewController.m; sourceTree = "<group>"; };
-		7BB0375116D1FADB001545E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BB0375216D1FADB001545E4 /* MapKit.framework in Frameworks */,
 				55C0F6AD16822B5A0072FAB0 /* UIKit.framework in Frameworks */,
 				55C0F6AF16822B5A0072FAB0 /* Foundation.framework in Frameworks */,
 				55C0F6B116822B5A0072FAB0 /* CoreGraphics.framework in Frameworks */,
@@ -98,7 +95,6 @@
 		55C0F6AB16822B5A0072FAB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BB0375116D1FADB001545E4 /* MapKit.framework */,
 				55C0F73716865ECF0072FAB0 /* SDScaffoldKit */,
 				55C0F6AC16822B5A0072FAB0 /* UIKit.framework */,
 				55C0F6AE16822B5A0072FAB0 /* Foundation.framework */,

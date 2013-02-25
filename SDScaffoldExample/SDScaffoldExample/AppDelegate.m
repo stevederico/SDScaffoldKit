@@ -17,10 +17,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    SDScaffoldIndexViewController *scaffoldViewController = [[SDScaffoldIndexViewController alloc] initWithEntityName:@"Point" sortBy:@"latitude" context:[self managedObjectContext]];
-
-    SDScaffoldMapViewController *scaffoldViewController = [[SDScaffoldMapViewController alloc] initWithEntityName:@"Point" sortBy:@"latitude" context:[self managedObjectContext]];
+    SDScaffoldIndexViewController *scaffoldViewController = [[SDScaffoldIndexViewController alloc] initWithEntityName:@"Point" sortBy:@"latitude" context:[self managedObjectContext]];
+#ifdef MK_EXTERN
+    NSLog(@"TRUE");
     
+    SDScaffoldMapViewController *scaffoldViewController = [[SDScaffoldMapViewController alloc] initWithEntityName:@"Point" sortBy:@"latitude" context:[self managedObjectContext]];
+#endif
+    
+
+
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scaffoldViewController];
     
     self.window.rootViewController = navController;

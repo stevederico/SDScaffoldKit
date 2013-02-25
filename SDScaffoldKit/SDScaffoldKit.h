@@ -6,18 +6,16 @@
 //  Copyright 2012 Steve Derico. All rights reserved.
 //
 
-// Views
 
 
     #import "SDMapPoint.h"
     #import "SDScaffoldMapViewController.h"
 
-#import "SDPlaceholderCell.h"
 
+#import "SDPlaceholderCell.h"
 #import "SDScaffoldIndexViewController.h"
 #import "SDScaffoldShowViewController.h"
 #import "SDScaffoldAddViewController.h"
-
 #import "SDTextFieldCell.h"
-// Cells
+
 
