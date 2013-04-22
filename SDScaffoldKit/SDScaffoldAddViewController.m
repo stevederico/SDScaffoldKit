@@ -49,7 +49,9 @@
         
         //Get Attribute Types from Entity
         for (NSPropertyDescription *property in _entityDescription) {
-            [_attributeTypes addObject:[property valueForKey:@"attributeType"]];
+            if ([property isKindOfClass:[NSAttributeDescription class]]) {
+                [_attributeTypes addObject:[property valueForKey:@"attributeType"]];
+            }
         }
         
         
